@@ -1,4 +1,55 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/container"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    tools:context=".MainActivity" tools:ignore="MergeRootFrame" />
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
+
+    <!-- The main content view -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar xmlns:toolbar="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary"
+            android:minHeight="?attr/actionBarSize"
+            toolbar:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            toolbar:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <!-- The navigation drawer -->
+    <!--<FrameLayout-->
+    <!--android:id="@+id/navigation_drawer_content"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_gravity="start"-->
+    <!--android:background="@color/white">-->
+
+
+    <!--</FrameLayout>-->
+
+    <com.miw.dit.presentation.util.ScrimInsetsFrameLayout xmlns:scrim_insets="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/navigation_drawer_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/white"
+        android:elevation="10dp"
+        android:fitsSystemWindows="true"
+        scrim_insets:insetForeground="#4000">
+
+        <!-- Your drawer content -->
+
+    </com.miw.dit.presentation.util.ScrimInsetsFrameLayout>
+</android.support.v4.widget.DrawerLayout>

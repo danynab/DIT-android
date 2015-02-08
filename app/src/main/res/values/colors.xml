@@ -6,5 +6,10 @@
     <color name="accent">#FF3D00</color>
     <color name="accent_light">#FF6E40</color>
     <color name="accent_dark">#DD2C00</color>
+    <color name="white">@android:color/white</color>
+    <color name="translucent">#22000000</color>
+    <color name="black">#000000</color>
+    <color name="gray">#eee</color>
+    <color name="dark_gray">#ccc</color>
 
 </resources>

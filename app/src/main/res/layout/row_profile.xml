@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.miw.dit.presentation.NavigationDrawerFragment">
+
+    <ImageView
+        android:id="@+id/image_cover"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/cover_default" />
+
+    <FrameLayout
+        android:id="@+id/image_cover_foreground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/image_cover"
+        android:layout_alignLeft="@+id/image_cover"
+        android:layout_alignStart="@+id/image_cover"
+        android:layout_alignRight="@+id/image_cover"
+        android:layout_alignEnd="@+id/image_cover"
+        android:layout_alignTop="@+id/image_cover"
+        android:background="@color/translucent"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:id="@+id/layout_account_data"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignBottom="@id/image_cover"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_above="@id/layout_account_data"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/image_profile"
+            android:src="@drawable/profile_default"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/text_first_letter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

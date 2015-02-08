@@ -1,9 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        DoItTogether {
+            keyAlias 'DoItTogether'
+            keyPassword 'd.It@2geth3R'
+            storeFile file('/Users/Dani/AndroidStudioProjects/DoItTogether/keystore/keystore.jks')
+            storePassword 'd.It@2geth3R'
+        }
+    }
     compileSdkVersion 21
     buildToolsVersion "21.1.1"
-
     defaultConfig {
         applicationId "com.miw.dit"
         minSdkVersion 16
@@ -26,4 +33,8 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:21.0.+'
     compile 'com.balysv:material-ripple:1.0.0'
     compile 'com.melnykov:floatingactionbutton:1.1.0'
+    compile 'com.google.android.gms:play-services-plus:6.5.87'
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'commons-io:commons-io:2.4'
+    compile 'de.hdodenhof:circleimageview:1.2.1'
 }
