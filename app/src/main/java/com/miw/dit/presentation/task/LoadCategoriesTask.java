@@ -12,9 +12,9 @@ import java.util.List;
  */
 public class LoadCategoriesTask extends AsyncTask<Void, Void, List<Category>> {
 
-    private onLoadCategoriesListener callback;
+    private LoadCategoriesListener callback;
 
-    public LoadCategoriesTask(onLoadCategoriesListener callback) {
+    public LoadCategoriesTask(LoadCategoriesListener callback) {
         this.callback = callback;
     }
 
@@ -30,7 +30,7 @@ public class LoadCategoriesTask extends AsyncTask<Void, Void, List<Category>> {
         callback.onLoadCategories(categories);
     }
 
-    public interface onLoadCategoriesListener {
+    public interface LoadCategoriesListener {
         public void onLoadCategories(List<Category> categories);
     }
 }

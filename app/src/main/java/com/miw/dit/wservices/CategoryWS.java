@@ -9,5 +9,7 @@ import java.util.List;
  */
 public interface CategoryWS {
 
-    public List<Category> getCategories();
+    public List<Category> findAll();
+
+    public Category findById(int id);
 }

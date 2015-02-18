@@ -21,10 +21,27 @@
             toolbar:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             toolbar:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-        <FrameLayout
-            android:id="@+id/container"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:id="@+id/progress_loading_events"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:indeterminate="true" />
+
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+
 
     </LinearLayout>
 
@@ -39,9 +56,9 @@
 
     <!--</FrameLayout>-->
 
-    <com.miw.dit.presentation.util.ScrimInsetsFrameLayout xmlns:scrim_insets="http://schemas.android.com/apk/res-auto"
+    <com.miw.dit.presentation.main.util.ScrimInsetsFrameLayout xmlns:scrim_insets="http://schemas.android.com/apk/res-auto"
         android:id="@+id/navigation_drawer_content"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/navdrawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/white"
@@ -51,5 +68,5 @@
 
         <!-- Your drawer content -->
 
-    </com.miw.dit.presentation.util.ScrimInsetsFrameLayout>
+    </com.miw.dit.presentation.main.util.ScrimInsetsFrameLayout>
 </android.support.v4.widget.DrawerLayout>

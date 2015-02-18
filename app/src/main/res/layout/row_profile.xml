@@ -1,15 +1,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="@dimen/navdrawer_width"
     android:layout_height="match_parent"
-    tools:context="com.miw.dit.presentation.NavigationDrawerFragment">
+    tools:context="com.miw.dit.presentation.main.NavigationDrawerFragment">
 
     <ImageView
         android:id="@+id/image_cover"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
+        android:layout_width="@dimen/navdrawer_width"
+        android:layout_height="@dimen/navdrawer_chosen_account_height"
+        android:scaleType="centerCrop"
         android:src="@drawable/cover_default" />
 
     <FrameLayout
@@ -17,10 +16,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignBottom="@id/image_cover"
-        android:layout_alignLeft="@+id/image_cover"
-        android:layout_alignStart="@+id/image_cover"
-        android:layout_alignRight="@+id/image_cover"
         android:layout_alignEnd="@+id/image_cover"
+        android:layout_alignLeft="@+id/image_cover"
+        android:layout_alignRight="@+id/image_cover"
+        android:layout_alignStart="@+id/image_cover"
         android:layout_alignTop="@+id/image_cover"
         android:background="@color/translucent"
         android:visibility="invisible" />
@@ -53,28 +52,15 @@
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/image_profile"
+        android:layout_width="@dimen/navdrawer_profile_image_size"
+        android:layout_height="@dimen/navdrawer_profile_image_size"
         android:layout_above="@id/layout_account_data"
+        android:layout_gravity="center_vertical"
         android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp">
+        android:layout_marginStart="16dp" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/image_profile"
-            android:src="@drawable/profile_default"
-            android:layout_gravity="center_vertical" />
-
-        <TextView
-            android:id="@+id/text_first_letter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textColor="@color/white"
-            android:textSize="30sp" />
-
-    </RelativeLayout>
 
 </RelativeLayout>

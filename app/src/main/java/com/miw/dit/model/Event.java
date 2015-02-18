@@ -3,6 +3,9 @@ package com.miw.dit.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Dani on 8/2/15.
  */
@@ -11,31 +14,34 @@ public class Event implements Parcelable {
     private int id;
     private String title;
     private String description;
-    private String image;
+    private String headerImage;
     private String address;
     private long time;
-    private float lat;
-    private float lng;
-    private int userId;
+    private double lat;
+    private double lng;
+    private String userId;
+    private String profileImage;
     private int categoryId;
-    private int placeId;
+    private List<Attendee> attendees;
 
     public Event() {
-
+        attendees = new ArrayList<>();
     }
 
     public Event(Parcel in) {
         id = in.readInt();
         title = in.readString();
         description = in.readString();
-        image = in.readString();
+        headerImage = in.readString();
         address = in.readString();
         time = in.readLong();
-        lat = in.readFloat();
-        lng = in.readFloat();
-        userId = in.readInt();
+        lat = in.readDouble();
+        lng = in.readDouble();
+        userId = in.readString();
+        profileImage = in.readString();
         categoryId = in.readInt();
-        placeId = in.readInt();
+        attendees = new ArrayList<>();
+        in.readTypedList(attendees, Attendee.CREATOR);
     }
 
     public int getId() {
@@ -62,12 +68,12 @@ public class Event implements Parcelable {
         this.description = description;
     }
 
-    public String getImage() {
-        return image;
+    public String getHeaderImage() {
+        return headerImage;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setHeaderImage(String headerImage) {
+        this.headerImage = headerImage;
     }
 
     public String getAddress() {
@@ -86,28 +92,36 @@ public class Event implements Parcelable {
         this.time = time;
     }
 
-    public float getLat() {
+    public double getLat() {
         return lat;
     }
 
-    public void setLat(float lat) {
+    public void setLat(double lat) {
         this.lat = lat;
     }
 
-    public float getLng() {
+    public double getLng() {
         return lng;
     }
 
-    public void setLng(float lng) {
+    public void setLng(double lng) {
         this.lng = lng;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 
     public int getCategoryId() {
@@ -118,12 +132,12 @@ public class Event implements Parcelable {
         this.categoryId = categoryId;
     }
 
-    public int getPlaceId() {
-        return placeId;
+    public List<Attendee> getAttendees() {
+        return attendees;
     }
 
-    public void setPlaceId(int placeId) {
-        this.placeId = placeId;
+    public void setAttendees(List<Attendee> attendees) {
+        this.attendees = attendees;
     }
 
     @Override
@@ -132,14 +146,15 @@ public class Event implements Parcelable {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", image='" + image + '\'' +
+                ", headerImage='" + headerImage + '\'' +
                 ", address='" + address + '\'' +
                 ", time=" + time +
                 ", lat=" + lat +
                 ", lng=" + lng +
-                ", userId=" + userId +
+                ", userId='" + userId + '\'' +
+                ", profileImage='" + profileImage + '\'' +
                 ", categoryId=" + categoryId +
-                ", placeId=" + placeId +
+                ", attendees=" + attendees +
                 '}';
     }
 
@@ -170,14 +185,15 @@ public class Event implements Parcelable {
         dest.writeInt(id);
         dest.writeString(title);
         dest.writeString(description);
-        dest.writeString(image);
+        dest.writeString(headerImage);
         dest.writeString(address);
         dest.writeLong(time);
-        dest.writeFloat(lat);
-        dest.writeFloat(lng);
-        dest.writeInt(userId);
+        dest.writeDouble(lat);
+        dest.writeDouble(lng);
+        dest.writeString(userId);
+        dest.writeString(profileImage);
         dest.writeInt(categoryId);
-        dest.writeInt(placeId);
+        dest.writeTypedList(attendees);
     }
 
     public static final Parcelable.Creator<Event> CREATOR = new Parcelable.Creator<Event>() {

@@ -1,5 +1,7 @@
 package com.miw.dit.wservices.impl.http;
 
+import android.util.Log;
+
 import org.apache.http.client.methods.HttpUriRequest;
 
 /**
@@ -10,6 +12,7 @@ public class HttpGet extends HttpMethod {
     private String url;
 
     public HttpGet(String url) {
+        Log.d(getClass().getSimpleName(), "url { " + url + " }");
         this.url = url;
     }
 

@@ -6,4 +6,10 @@ package com.miw.dit.wservices;
 public interface WServicesFactory {
 
     public CategoryWS getCategoryWS();
+
+    public EventWS getEventWS();
+
+    public AttendeeWS getAttendeeWS();
+
+    public PlaceWS getPlaceWS();
 }

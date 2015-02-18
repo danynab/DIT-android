@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.balysv.materialripple.MaterialRippleLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ripple="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="48dp"
-    android:minHeight="48dp"
-    ripple:rippleOverlay="true">
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true">
 
     <RelativeLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/hover_dark_grey">
+        android:layout_height="48dp"
+        android:background="@drawable/background_navigation_item"
+        android:minHeight="48dp">
 
         <ImageView
             android:id="@+id/image_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="16sp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:src="@drawable/ic_label_black_24dp" />
 
         <TextView
@@ -25,9 +27,22 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="72sp"
+            android:layout_marginStart="72sp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#dd000000"
             android:textSize="14sp"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/image_check"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_done_black_24dp" />
     </RelativeLayout>
-</com.balysv.materialripple.MaterialRippleLayout>
+</FrameLayout>

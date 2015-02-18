@@ -6,4 +6,10 @@ package com.miw.dit.business;
 public interface BusinessFactory {
 
     public CategoryServices getCategoryServices();
+
+    public EventServices getEventServices();
+
+    public AttendeeServices getAttendeeServices();
+
+    public PlaceServices getPlacesServices();
 }

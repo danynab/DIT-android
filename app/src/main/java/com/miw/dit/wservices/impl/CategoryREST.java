@@ -2,7 +2,6 @@ package com.miw.dit.wservices.impl;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.miw.dit.infrastructure.WServicesUtil;
 import com.miw.dit.model.Category;
 import com.miw.dit.wservices.CategoryWS;
 import com.miw.dit.wservices.impl.http.HttpGet;
@@ -16,9 +15,8 @@ import java.util.List;
  */
 public class CategoryREST implements CategoryWS {
 
-
     @Override
-    public List<Category> getCategories() {
+    public List<Category> findAll() {
         HttpGet httpGet = new HttpGet(WServicesUtil.getCategoriesUrl());
         String json = httpGet.execute();
         Gson gson = new Gson();
@@ -26,5 +24,14 @@ public class CategoryREST implements CategoryWS {
         }.getType();
         List<Category> result = gson.fromJson(json, linesList);
         return result == null ? new ArrayList<Category>() : result;
+    }
+
+    @Override
+    public Category findById(int id) {
+        HttpGet httpGet = new HttpGet(WServicesUtil.getCategoryUrl(id));
+        String json = httpGet.execute();
+        Gson gson = new Gson();
+        Category category = gson.fromJson(json, Category.class);
+        return category;
     }
 }

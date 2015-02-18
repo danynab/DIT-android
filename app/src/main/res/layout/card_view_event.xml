@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginEnd="8dp"
+    android:layout_marginLeft="8dp"
+    android:id="@+id/card_view_event"
+    android:layout_marginRight="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardUseCompatPadding="true">
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image_event"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:adjustViewBounds="true"
+            android:background="@color/primary"
+            android:cropToPadding="false"
+            android:scaleType="fitStart" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image_event_profile"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/image_event"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="-24dp" />
+
+
+        <RelativeLayout
+            android:id="@+id/layout_event_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image_event_profile"
+            android:paddingBottom="16dp"
+            android:paddingEnd="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="4dp">
+
+            <TextView
+                android:id="@+id/text_event_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Don't eat alone in Computer Engineering's School"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="24sp" />
+
+            <RelativeLayout
+                android:id="@+id/layout_event_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_event_title"
+                android:layout_marginTop="8dp">
+
+                <ImageView
+                    android:id="@+id/image_event_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_explore_black_18dp" />
+
+
+                <TextView
+                    android:id="@+id/text_event_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/image_event_address"
+                    android:text="Calle Valdes Salas, 7, 33007 Oviedo, Asturias"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_event_address"
+                android:layout_marginTop="8dp">
+
+                <ImageView
+                    android:id="@+id/image_event_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/ic_today_black_18dp" />
+
+                <TextView
+                    android:id="@+id/text_event_time"
+                    android:layout_width="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/image_event_time"
+                    android:text="7/2/2015 16:34:02"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_event_content"
+            android:src="@drawable/divider" />
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_marginTop="4dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_event_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_event_details"
+                style="@style/ButtonFlat"
+                android:textColor="@color/black"
+                android:layout_marginStart="8dp"
+                android:layout_height="36dp"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="Details" />
+
+            <Button
+                android:id="@+id/button_event_primary"
+                style="@style/ButtonFlat"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginLeft="4dp"
+                android:text="Attend" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>

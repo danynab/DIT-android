@@ -1,7 +1,7 @@
 package com.miw.dit.wservices.impl.http;
 
 import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.ByteArrayEntity;
 
 import java.io.UnsupportedEncodingException;
 
@@ -9,8 +9,6 @@ import java.io.UnsupportedEncodingException;
  * Created by Dani on 7/2/15.
  */
 public class HttpPost extends HttpMethod {
-
-    private static final String TAG = "HttpPost";
 
     private String url;
     private String content;
@@ -23,8 +21,9 @@ public class HttpPost extends HttpMethod {
     @Override
     protected HttpUriRequest doMethod() throws UnsupportedEncodingException {
         org.apache.http.client.methods.HttpPost httpPost = new org.apache.http.client.methods.HttpPost(url);
-        httpPost.setHeader("content-type", "application/json; charset=utf-8");
-        httpPost.setEntity(new StringEntity(content));
+        httpPost.setHeader("Content-Type", "application/json");
+        byte[] contentBytes = content.getBytes("UTF-8");
+        httpPost.setEntity((new ByteArrayEntity(contentBytes)));
         return httpPost;
     }
 }

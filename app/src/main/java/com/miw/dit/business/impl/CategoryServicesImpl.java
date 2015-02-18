@@ -13,6 +13,11 @@ public class CategoryServicesImpl implements CategoryServices {
 
     @Override
     public List<Category> getCategories() {
-        return Factories.getWServicesFactory().getCategoryWS().getCategories();
+        return Factories.getWServicesFactory().getCategoryWS().findAll();
+    }
+
+    @Override
+    public Category getCategory(int id) {
+        return Factories.getWServicesFactory().getCategoryWS().findById(id);
     }
 }
