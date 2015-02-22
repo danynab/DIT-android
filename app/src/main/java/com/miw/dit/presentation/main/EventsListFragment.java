@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
@@ -84,7 +84,7 @@ public class EventsListFragment extends Fragment implements LoadEventsListener, 
 
     private RecyclerView recyclerViewEvents;
     private EventsAdapter eventsAdapter;
-    private ProgressBar progressLoadingEvents;
+    private LinearLayout watermarkNoEvents;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -107,8 +107,6 @@ public class EventsListFragment extends Fragment implements LoadEventsListener, 
 
         View rootView = inflater.inflate(R.layout.fragment_list_events, container, false);
 
-        progressLoadingEvents = (ProgressBar) container.getRootView().findViewById(R.id.progress_loading_events);
-
         recyclerViewEvents = (RecyclerView) rootView.findViewById(R.id.recycler_view_events);
         LinearLayoutManager recyclerlinearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerViewEvents.setLayoutManager(recyclerlinearLayoutManager);
@@ -122,6 +120,8 @@ public class EventsListFragment extends Fragment implements LoadEventsListener, 
             }
         });
 
+        watermarkNoEvents = (LinearLayout) rootView.findViewById(R.id.watermark_no_events);
+
         executeGetEvents();
 
         return rootView;
@@ -133,9 +133,13 @@ public class EventsListFragment extends Fragment implements LoadEventsListener, 
         if (eventsAdapter == null) {
             eventsAdapter = new EventsAdapter(getActivity(), this, events, userId);
             recyclerViewEvents.setAdapter(eventsAdapter);
-            progressLoadingEvents.setVisibility(View.GONE);
+            callback.onLoadEvents();
             if (events.isEmpty())
                 setFullEventsAdapter();
+            if (eventsAdapter.getItemCount() == 0)
+                watermarkNoEvents.setVisibility(View.VISIBLE);
+            else
+                watermarkNoEvents.setVisibility(View.GONE);
         } else {
             if (events.isEmpty())
                 setFullEventsAdapter();
@@ -148,7 +152,8 @@ public class EventsListFragment extends Fragment implements LoadEventsListener, 
 
     private void setFullEventsAdapter() {
         eventsAdapter.setFull();
-        Toast.makeText(getActivity(), "There are not more events", Toast.LENGTH_SHORT).show();
+        if (eventsAdapter.getItemCount() > 0)
+            Toast.makeText(getActivity(), "There are not more events", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -197,14 +202,14 @@ public class EventsListFragment extends Fragment implements LoadEventsListener, 
         if (lat == 0 || lng == 0) {
             if (userId != null) {
                 if (attendees)
-                    new LoadEventsAttendedTask(userId, lastId, 5, this).execute();
+                    new LoadEventsAttendedTask(userId, lastId, Conf.ELEMENTS_EVENTS, this).execute();
                 else
-                    new LoadUserEventsTask(this, userId, lastId, 5).execute();
+                    new LoadUserEventsTask(this, userId, lastId, Conf.ELEMENTS_EVENTS).execute();
             }
         } else if (category != null)
-            new LoadNearEventsTask(this, category.getId(), lat, lng, 10, lastId, 5).execute();
+            new LoadNearEventsTask(this, category.getId(), lat, lng, Conf.RADIUS_EVENTS, lastId, Conf.ELEMENTS_EVENTS).execute();
         else
-            new LoadNearEventsTask(this, lat, lng, 10, lastId, 5).execute();
+            new LoadNearEventsTask(this, lat, lng, Conf.RADIUS_EVENTS, lastId, Conf.ELEMENTS_EVENTS).execute();
     }
 
     @Override
@@ -228,5 +233,7 @@ public class EventsListFragment extends Fragment implements LoadEventsListener, 
         public void onNewEventClick();
 
         public void onDetailsEventClick(Event event);
+
+        public void onLoadEvents();
     }
 }

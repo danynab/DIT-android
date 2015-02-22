@@ -17,7 +17,7 @@ public class PlaceREST implements PlaceWS {
 
     @Override
     public List<Place> findByCategory(int categoryId, double lat, double lng, double radius, Integer elements) {
-        HttpGet httpGet = new HttpGet(WServicesUtil.getPlacesByCategoryUrl(categoryId));
+        HttpGet httpGet = new HttpGet(WServicesUtil.getPlacesByCategoryUrl(categoryId, lat, lng, radius, elements));
         String json = httpGet.execute();
         Gson gson = new Gson();
         Type linesList = new TypeToken<List<Place>>() {

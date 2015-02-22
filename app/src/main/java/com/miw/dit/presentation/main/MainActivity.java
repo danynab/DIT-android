@@ -4,12 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -54,6 +58,14 @@ public class MainActivity extends ActionBarActivity implements
     private ActionBarDrawerToggle drawerToggle;
     private DrawerLayout drawerLayout;
     private ProgressBar progressLoadingEvents;
+    private FragmentAvailable fragmentInUse;
+
+    private enum FragmentAvailable {
+        NearEvents,
+        EventsByCategory,
+        EventsOfUser,
+        AttendedEvents
+    }
 
 
     @Override
@@ -80,6 +92,40 @@ public class MainActivity extends ActionBarActivity implements
 
             progressLoadingEvents = (ProgressBar) findViewById(R.id.progress_loading_events);
 
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.refresh:
+                Fragment fragment = null;
+
+                if (fragmentInUse == FragmentAvailable.NearEvents)
+                    fragment = EventsListFragment.newNearEventsInstance(lat, lng);
+                else if (fragmentInUse == FragmentAvailable.EventsByCategory)
+                    fragment = EventsListFragment.newEventsByCategoryInstance(categorySelected, lat, lng);
+                else if (fragmentInUse == FragmentAvailable.EventsOfUser)
+                    fragment = EventsListFragment.newEventsOfUserInstance();
+                else if (fragmentInUse == FragmentAvailable.AttendedEvents)
+                    fragment = EventsListFragment.newAttendedEventsOfUserInstance();
+
+                if (fragment != null) {
+                    progressLoadingEvents.setVisibility(View.VISIBLE);
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, fragment)
+                            .commit();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -147,9 +193,10 @@ public class MainActivity extends ActionBarActivity implements
         if (categoriesLoaded && profileLoaded && locationLoaded) {
             categoriesLoaded = false;
             profileLoaded = false;
-            EventsListFragment eventsListFragment = EventsListFragment.newNearEventsInstance(lat, lng);
+            fragmentInUse = FragmentAvailable.NearEvents;
+            EventsListFragment fragment = EventsListFragment.newNearEventsInstance(lat, lng);
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, eventsListFragment)
+                    .replace(R.id.container, fragment)
                     .commit();
 
             NavigationDrawerFragment navigationDrawerFragment = NavigationDrawerFragment.newInstance(account, personName, coverPhotoUrl, categories);
@@ -163,9 +210,10 @@ public class MainActivity extends ActionBarActivity implements
     public void onSelectCategoryListener(Category category) {
         categorySelected = category;
         progressLoadingEvents.setVisibility(View.VISIBLE);
-        EventsListFragment eventsListFragment = EventsListFragment.newEventsByCategoryInstance(category, lat, lng);
+        fragmentInUse = FragmentAvailable.EventsByCategory;
+        EventsListFragment fragment = EventsListFragment.newEventsByCategoryInstance(category, lat, lng);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, eventsListFragment)
+                .replace(R.id.container, fragment)
                 .commit();
         drawerLayout.closeDrawers();
     }
@@ -179,9 +227,10 @@ public class MainActivity extends ActionBarActivity implements
     public void onSelectShowNearEvents() {
         categorySelected = null;
         progressLoadingEvents.setVisibility(View.VISIBLE);
-        EventsListFragment eventsListFragment = EventsListFragment.newNearEventsInstance(lat, lng);
+        fragmentInUse = FragmentAvailable.NearEvents;
+        EventsListFragment fragment = EventsListFragment.newNearEventsInstance(lat, lng);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, eventsListFragment)
+                .replace(R.id.container, fragment)
                 .commit();
         drawerLayout.closeDrawers();
     }
@@ -190,9 +239,10 @@ public class MainActivity extends ActionBarActivity implements
     public void onSelectYourEvents(String userId) {
         categorySelected = null;
         progressLoadingEvents.setVisibility(View.VISIBLE);
-        EventsListFragment eventsListFragment = EventsListFragment.newEventsOfUserInstance();
+        fragmentInUse = FragmentAvailable.EventsOfUser;
+        EventsListFragment fragment = EventsListFragment.newEventsOfUserInstance();
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, eventsListFragment)
+                .replace(R.id.container, fragment)
                 .commit();
         drawerLayout.closeDrawers();
     }
@@ -201,9 +251,10 @@ public class MainActivity extends ActionBarActivity implements
     public void onSelectYourAttendances(String userId) {
         categorySelected = null;
         progressLoadingEvents.setVisibility(View.VISIBLE);
-        EventsListFragment eventsListFragment = EventsListFragment.newAttendedEventsOfUserInstance();
+        fragmentInUse = FragmentAvailable.AttendedEvents;
+        EventsListFragment fragment = EventsListFragment.newAttendedEventsOfUserInstance();
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, eventsListFragment)
+                .replace(R.id.container, fragment)
                 .commit();
         drawerLayout.closeDrawers();
     }
@@ -222,6 +273,11 @@ public class MainActivity extends ActionBarActivity implements
         i.putExtra(DetailsEventActivity.ARG_USER_ID, userId);
         i.putExtra(DetailsEventActivity.ARG_PROFILE_IMAGE, profilePhotoUrl);
         startActivity(i);
+    }
+
+    @Override
+    public void onLoadEvents() {
+        progressLoadingEvents.setVisibility(View.GONE);
     }
 
     @Override

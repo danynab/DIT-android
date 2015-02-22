@@ -14,15 +14,23 @@ public class LoadPlacesTask extends AsyncTask<Void, Void, List<Place>> {
 
     private LoadPlacesListener callback;
     private int categoryId;
+    private double lat;
+    private double lng;
+    private double radius;
+    private int elements;
 
-    public LoadPlacesTask(int categoryId, LoadPlacesListener callback) {
+    public LoadPlacesTask(int categoryId, double lat, double lng, double radius, int elements, LoadPlacesListener callback) {
         this.callback = callback;
         this.categoryId = categoryId;
+        this.lat = lat;
+        this.lng = lng;
+        this.radius = radius;
+        this.elements = elements;
     }
 
     @Override
     protected List<Place> doInBackground(Void... params) {
-        List<Place> places = Factories.getBusinessFactory().getPlacesServices().getPlacesByCategoryId(categoryId, 0, 0, 0, null);
+        List<Place> places = Factories.getBusinessFactory().getPlacesServices().getPlacesByCategoryId(categoryId, lat, lng, radius, elements);
         return places;
     }
 

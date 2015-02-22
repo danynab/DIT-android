@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.miw.dit.R;
+import com.miw.dit.infrastructure.Conf;
 import com.miw.dit.model.Attendee;
 import com.miw.dit.model.Category;
 import com.miw.dit.model.Event;
@@ -77,7 +78,7 @@ public class DetailsEventFragment extends Fragment implements
             profileImage = getArguments().getString(ARG_PROFILE_IMAGE);
 
             new LoadCategoryTask(event.getCategoryId(), this).execute();
-            new LoadPlacesTask(event.getCategoryId(), this).execute();
+            new LoadPlacesTask(event.getCategoryId(), event.getLat(), event.getLng(), Conf.RADIUS_PLACES, Conf.ELEMENTS_PLACES, this).execute();
         }
     }
 

@@ -92,8 +92,11 @@ public class WServicesUtil {
 
     private static final String GET_PLACES_BY_CATEGORY = GET_CATEGORY + "/places";
 
-    public static String getPlacesByCategoryUrl(int categoryId) {
-        return GET_PLACES_BY_CATEGORY.replace("?", String.valueOf(categoryId));
+    public static String getPlacesByCategoryUrl(int categoryId, double lat, double lng, double radius, Integer elements) {
+        String url = "?lat=" + lat + "&lng=" + lng + "&radius=" + radius;
+        if (elements != null)
+            url = url + "&elements=" + elements;
+        return GET_PLACES_BY_CATEGORY.replace("?", String.valueOf(categoryId)) + url;
     }
 
 

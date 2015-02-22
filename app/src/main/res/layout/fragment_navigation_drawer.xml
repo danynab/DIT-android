@@ -68,7 +68,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16sp"
                     android:layout_marginStart="16sp"
-                    android:src="@drawable/ic_account_box_black_24dp" />
+                    android:src="@drawable/ic_done_black_24dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="72sp"
                     android:layout_marginStart="72sp"
-                    android:text="Your attendances"
+                    android:text="Events you attend to"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#dd000000"
                     android:textSize="14sp"
